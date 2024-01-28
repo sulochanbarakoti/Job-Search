@@ -59,7 +59,7 @@ const Signup = () => {
         }
       );
       console.log(response.data);
-      navigate(`/`, { state: response });
+      navigate(`/`);
     } catch (error) {
       console.error(error);
       alert("Error registering user");
