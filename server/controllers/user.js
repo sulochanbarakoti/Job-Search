@@ -1,5 +1,6 @@
 const User = require("../modules/user");
 
+//New user registration
 const createUser = async (req, res) => {
   try {
     // Extract data from request body
@@ -24,5 +25,7 @@ const createUser = async (req, res) => {
     res.status(500).json({ msg: "Internal Server Error" });
   }
 };
+
+//user login logic
 
 module.exports = createUser;

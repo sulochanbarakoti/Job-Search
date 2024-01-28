@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullname: "",
     username: "",
@@ -28,7 +29,18 @@ const Signup = () => {
   //handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    // Check if all fields are filled
+    if (
+      (!formData.fullname ||
+        !formData.username ||
+        !formData.email ||
+        !formData.phone ||
+        !formData.password,
+      !formData.image)
+    ) {
+      alert("Please fill in all fields.");
+      return;
+    }
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("fullname", formData.fullname);
@@ -47,7 +59,7 @@ const Signup = () => {
         }
       );
       console.log(response.data);
-      alert("User registered successfully!");
+      navigate(`/`, { state: response });
     } catch (error) {
       console.error(error);
       alert("Error registering user");
