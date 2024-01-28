@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Stack, Button } from "react-bootstrap";
+import axios from "axios";
+import { Container, Row, Col, Form } from "react-bootstrap";
 
 const Signup = () => {
+  const [msg, setMsg] = useState("");
   const [formData, setFormData] = useState({
     fullname: "",
     username: "",
@@ -20,14 +22,39 @@ const Signup = () => {
   //handle file changes
   const onFileSelected = (e) => {
     const file = e.target.files[0];
-    setFormData({ ...formData, ["image"]: file });
+    setFormData((prevFormData) => ({ ...prevFormData, image: file }));
   };
 
   //handle submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("fullname", formData.fullname);
+      formDataToSend.append("username", formData.username);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("phone", formData.phone);
+      formDataToSend.append("password", formData.password);
+      formDataToSend.append("image", formData.image);
+      const response = await axios.post(
+        "http://localhost:3001/api/v1/signup",
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+      alert("User registered successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Error registering user");
+    }
   };
+
+  //send form data to the server
 
   return (
     <Container className="d-flex justify-content-center  align-items-center vh-100">
@@ -102,7 +129,7 @@ const Signup = () => {
             </Form.Group>
             <Form.Group className="p-2">
               <Form.Control
-                type="button"
+                type="submit"
                 value="Sign Up"
                 onClick={handleSubmit}
                 className="btn btn-success w-100"
