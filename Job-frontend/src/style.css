@@ -1,0 +1,54 @@
+/* navbar css */
+#navbar-system {
+  background-color: #ffffff; /* Set your desired background color */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+}
+#navbar-system a {
+  color: #fff; /* Set the color of links */
+  margin-right: 15px; /* Add right margin to space out the links */
+  text-decoration: none; /* Remove default link underline */
+}
+
+#navbar-system a:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
+
+#search-bar {
+  position: absolute;
+  left: 10%;
+  top: 65%;
+  right: 10%;
+  width: "100%";
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  #search-bar {
+    position: relative;
+    left: 0;
+    top: auto;
+    right: 0;
+  }
+}
+
+/* color option for background */
+#bg-grey {
+  background-color: rgb(240, 235, 235);
+}
+
+/* category components button style code */
+#category-btn {
+  border: 1;
+}
+
+/* topworker component style code */
+#card-style {
+  width: 250px;
+  margin: 10px;
+}
+
+#card-image {
+  padding: 2px;
+  height: 250px;
+  width: 250px;
+}
