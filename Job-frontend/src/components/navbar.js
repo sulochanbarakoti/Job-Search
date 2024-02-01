@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Container, Image, Button } from "react-bootstrap";
 import logo from "../media/logo.jpg";
 import { CgProfile } from "react-icons/cg";
+import { UserContext } from "../context/userContext";
+import { Link } from "react-router-dom";
 
 const NavbarSystem = () => {
-  const user = "Sulochan Barakoti";
+  const { userData } = useContext(UserContext);
   return (
     <Navbar id="navbar-system">
       <Container>
@@ -13,11 +15,11 @@ const NavbarSystem = () => {
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          {user ? (
+          {userData ? (
             <Navbar.Text>
-              <CgProfile style={{ marginBottom: 2 }} />
+              <CgProfile style={{ marginBottom: 2 }} size={20} color="black" />
               <a href="#login" className="fw-semibold p-1 text-black">
-                {user}
+                {userData}
               </a>
             </Navbar.Text>
           ) : (
@@ -25,7 +27,9 @@ const NavbarSystem = () => {
               <Button variant="success" className="me-2">
                 Signup
               </Button>
-              <Button variant="success">Login</Button>
+              <Link to="/login">
+                <Button variant="success">Login</Button>
+              </Link>
             </Navbar.Text>
           )}
         </Navbar.Collapse>

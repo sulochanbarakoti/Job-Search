@@ -1,3 +1,7 @@
+.App {
+  font-family: Arial, sans-serif;
+}
+
 /* navbar css */
 #navbar-system {
   background-color: #ffffff; /* Set your desired background color */
@@ -51,4 +55,27 @@
   padding: 2px;
   height: 250px;
   width: 250px;
+}
+
+#profile-description {
+  font-size: small;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* footer style code */
+
+#footer-logo {
+  height: 50px;
+  width: auto;
+}
+
+.social-media {
+  height: 50px;
+}
+
+.copyright {
+  margin-top: 10px;
+  background-color: green;
+  color: white;
 }

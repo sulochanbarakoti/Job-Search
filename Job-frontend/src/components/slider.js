@@ -16,7 +16,7 @@ import { finlandCities } from "../data";
 const Slider = () => {
   const [city, setCity] = React.useState();
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", height: "auto" }}>
       <Carousel slide={false}>
         <Carousel.Item interval={3000}>
           <img className="d-block w-100" src={slider2} />
@@ -48,7 +48,6 @@ const Slider = () => {
                   </Dropdown.Item>
                 ))}
               </DropdownButton>
-              {/* <FormControl aria-describedby="basic-addon1" /> */}
             </InputGroup>
             <Button className="m-1 w-100" variant="outline-success">
               Search

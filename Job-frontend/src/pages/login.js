@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Container, Form, Row, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/userContext";
 
 const Login = () => {
+  const { setUserData, setMyToken } = useContext(UserContext);
   const [hiddenAlert, setHiddenAlert] = useState(true);
   const [userDetail, setUserDetail] = useState({ username: "", password: "" });
+  const [msg, setMsg] = useState();
+  const navigate = useNavigate();
 
   //handle on change
   const handleChange = (e) => {
@@ -20,9 +25,11 @@ const Login = () => {
         "http://localhost:3001/api/v1/login",
         userDetail
       );
-      const authToken = response.headers["x-auth-token"];
-      console.log(authToken);
-      console.log(response);
+      const user = response.data.user.username;
+      setUserData(user);
+      setMyToken(response.data.token);
+      navigate(`/`);
+      setMsg(response.data.msg);
     } catch (error) {
       console.log(error);
     }
@@ -65,6 +72,7 @@ const Login = () => {
             </Form.Group>
           </Form>
         </Col>
+        <Row className="justify-content-center pt-3 text-danger">{msg}</Row>
       </Row>
     </Container>
   );
