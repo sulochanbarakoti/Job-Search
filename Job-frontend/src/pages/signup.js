@@ -66,8 +66,6 @@ const Signup = () => {
     }
   };
 
-  //send form data to the server
-
   return (
     <Container className="d-flex justify-content-center  align-items-center vh-100">
       <Row className="bg-info fw-semibold rounded py-3">

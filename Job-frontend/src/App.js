@@ -5,10 +5,9 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Home from "./pages/Home";
 import "./style.css";
-import { UserContext } from "./context/userContext";
+import Dashboard from "./pages/dashboard";
 
 function App() {
-  const [allData, setAllData] = useState({});
   return (
     <div className="App">
       <BrowserRouter>
@@ -16,6 +15,7 @@ function App() {
           <Route index path="/" element={<Home />} />
           <Route path="/registration" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

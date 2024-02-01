@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 
 const Login = () => {
-  const { setUserData, setMyToken } = useContext(UserContext);
+  const { setUserData, setMyToken, setIsAdmin } = useContext(UserContext);
   const [hiddenAlert, setHiddenAlert] = useState(true);
   const [userDetail, setUserDetail] = useState({ username: "", password: "" });
   const [msg, setMsg] = useState();
@@ -26,9 +26,16 @@ const Login = () => {
         userDetail
       );
       const user = response.data.user.username;
+      const admin = response.data.user.admin;
+      console.log(response);
+      setIsAdmin(admin);
       setUserData(user);
       setMyToken(response.data.token);
-      navigate(`/`);
+      if (admin) {
+        navigate("/dashboard");
+      } else {
+        navigate(`/`);
+      }
       setMsg(response.data.msg);
     } catch (error) {
       console.log(error);

@@ -7,10 +7,6 @@ import {
   Figure,
   Accordion,
 } from "react-bootstrap";
-import { GoCodeReview, GoLaw } from "react-icons/go";
-import { BiSolidCarMechanic } from "react-icons/bi";
-import { MdEngineering, MdPlumbing, MdDesignServices } from "react-icons/md";
-import { GiElectric } from "react-icons/gi";
 import jobImage from "../media/find-a-job.png";
 
 const Category = () => {
