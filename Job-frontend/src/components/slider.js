@@ -30,29 +30,31 @@ const Slider = () => {
         </Carousel.Item>
       </Carousel>
       <div id="search-bar" className="p-1 bg-white rounded">
-        <Form className="d-flex flex-column flex-md-row justify-content-between align-items-center p-1">
+        <Form className="d-flex flex-column flex-md-row p-1">
           <FormControl
             type="text"
             placeholder="Category"
-            className="m-1 w-100 mb-2" // Full width on mobile
+            className="m-1 w-100" // Full width on mobile
           />
-          <div className="d-flex flex-column flex-md-row w-100 mb-2">
-            <InputGroup className="mb-2 mb-md-0 mr-md-1 w-100">
-              <DropdownButton
-                variant="outline-secondary"
-                title={!city ? "Choose the city" : city}
-              >
-                {finlandCities.map((city, index) => (
-                  <Dropdown.Item key={index} onClick={() => setCity(city)}>
-                    {city}
-                  </Dropdown.Item>
-                ))}
-              </DropdownButton>
-            </InputGroup>
-            <Button className="m-1 w-100" variant="outline-success">
-              Search
-            </Button>
-          </div>
+          <InputGroup className="m-1" style={{ width: "auto" }}>
+            <DropdownButton
+              variant="outline-secondary"
+              title={!city ? "Choose the city" : city}
+            >
+              {finlandCities.map((city, index) => (
+                <Dropdown.Item key={index} onClick={() => setCity(city)}>
+                  {city}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
+          </InputGroup>
+          <Button
+            className="m-1"
+            style={{ width: "60%" }}
+            variant="outline-success"
+          >
+            Search
+          </Button>
         </Form>
       </div>
     </div>

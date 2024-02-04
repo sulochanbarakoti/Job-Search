@@ -1,0 +1,18 @@
+const mongoose = require("mongoose");
+
+const memberSchema = new mongoose.Schema({
+  job_title: { type: String },
+  company: { type: String },
+  open_date: { type: String, required: true },
+  close_date: { type: Number, required: true },
+  description: { type: String },
+  qualification: { type: String },
+  application_instruction: { type: String },
+  job_type: { type: String },
+  location: { type: String },
+  category: { type: String },
+  job_level: { type: String },
+  image: { data: Buffer, contentType: String },
+});
+
+module.exports = mongoose.model("member", memberSchema);

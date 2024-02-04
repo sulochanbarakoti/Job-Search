@@ -1,6 +1,5 @@
-import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Home from "./pages/Home";
