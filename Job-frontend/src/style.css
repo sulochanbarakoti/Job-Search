@@ -115,3 +115,14 @@
   border-radius: 2;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+/* dashboard load page style to show job list */
+#job-style {
+  display: flex;
+  justify-content: center;
+  background: aliceblue;
+  width: auto;
+  padding: 2%;
+  border-radius: 2;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}

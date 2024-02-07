@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Container, Dropdown, Form, Row, Col } from "react-bootstrap";
 
 const AddJobForm = () => {
+  const [validated, setValidate] = useState(false);
   const [Category, setCategory] = useState([]);
   const [City, setCity] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [imageData, setImageData] = useState("");
   const [formData, setFormData] = useState({
     job_title: "",
     company: "",
@@ -15,8 +17,7 @@ const AddJobForm = () => {
     description: "",
     qualification: "",
     application_instruction: "",
-    permanent: null,
-    full_time: "",
+    job_type: "",
     location: "",
     category: "",
     job_level: "",
@@ -63,22 +64,39 @@ const AddJobForm = () => {
 
   //handle the submit  event of the form.
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const dataToSend = formData;
-    dataToSend.category = Category;
-    // if (
-    //   (!formData.fullname ||
-    //     !formData.title ||
-    //     !formData.email ||
-    //     !formData.phone ||
-    //     !formData.category,
-    //   !formData.image)
-    // ) {
-    //   alert("Please fill in all fields.");
-    //   return;
-    // }
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    const dataToSend = new FormData();
+    dataToSend.append("job_title", formData.job_title);
+    dataToSend.append("company", formData.company);
+    dataToSend.append("open_date", formData.open_date);
+    dataToSend.append("close_date", formData.close_date);
+    dataToSend.append("description", formData.description);
+    dataToSend.append("qualification", formData.qualification);
+    dataToSend.append(
+      "application_instruction",
+      formData.application_instruction
+    );
+    dataToSend.append("job_type", formData.job_type);
+    dataToSend.append("location", selectedCity);
+    dataToSend.append("category", selectedCategory);
+    dataToSend.append("job_level", formData.job_level);
+    dataToSend.append("image", formData.image);
     try {
-      const response = await axios("", dataToSend);
+      const response = await axios.post(
+        "http://localhost:3001/api/v1/create/job",
+        dataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      // console.log(response);
     } catch (error) {}
     console.log(dataToSend);
   };
@@ -87,7 +105,7 @@ const AddJobForm = () => {
       id="add-member"
       className="d-flex justify-content-center  align-items-center fw-semibold rounded py-3"
     >
-      <Form>
+      <Form validated={validated}>
         <Row className="pb-3">
           <Col>
             <Form.Group className="pe-5">
@@ -97,6 +115,7 @@ const AddJobForm = () => {
                 name="job_title"
                 placeholder="Enter full name"
                 onChange={handleChange}
+                required
               />
             </Form.Group>
           </Col>
@@ -109,6 +128,7 @@ const AddJobForm = () => {
                 name="company"
                 placeholder="Enter title"
                 onChange={handleChange}
+                required
               />
             </Form.Group>
           </Col>
@@ -122,6 +142,7 @@ const AddJobForm = () => {
                 name="open_date"
                 placeholder="Enter your email"
                 onChange={handleChange}
+                required
               />
             </Form.Group>
           </Col>
@@ -133,6 +154,7 @@ const AddJobForm = () => {
                 name="close_date"
                 placeholder="Enter phone"
                 onChange={handleChange}
+                required
               />
             </Form.Group>
           </Col>
@@ -146,14 +168,17 @@ const AddJobForm = () => {
                   {selectedCategory || "Choose a category"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="py-2 text-start">
-                  {Category.map((data, index) => (
-                    <Dropdown.Item
-                      key={index}
-                      onClick={() => setSelectedCategory(data.category)}
-                    >
-                      {data.category}
-                    </Dropdown.Item>
-                  ))}
+                  {Array.isArray(Category) &&
+                    Category.map((data, index) => (
+                      <Dropdown.Item
+                        key={index}
+                        value={data.category}
+                        name="category"
+                        onClick={() => setSelectedCategory(data.category)}
+                      >
+                        {data.category}
+                      </Dropdown.Item>
+                    ))}
                 </Dropdown.Menu>
               </Dropdown>
             </Form.Group>
@@ -163,7 +188,7 @@ const AddJobForm = () => {
               <Form.Label>Select City:</Form.Label>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {selectedCity || "Choose a category"}
+                  {selectedCity || "Choose a City"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="py-2 text-start">
                   {City.map((data, index) => (
@@ -186,6 +211,7 @@ const AddJobForm = () => {
             placeholder="Give  a brief description ..."
             name="description"
             onChange={handleChange}
+            required
           />
         </Form.Group>
         <Form.Group className="pb-3">
@@ -193,8 +219,9 @@ const AddJobForm = () => {
           <Form.Control
             as="textarea"
             placeholder="Give  a brief description ..."
-            name="description"
+            name="qualification"
             onChange={handleChange}
+            required
           />
         </Form.Group>
         <Form.Group className="pb-3">
@@ -204,6 +231,7 @@ const AddJobForm = () => {
             placeholder="Give  a brief description ..."
             name="application_instruction"
             onChange={handleChange}
+            required
           />
         </Form.Group>
         <Form.Group className="pb-3">
@@ -213,19 +241,58 @@ const AddJobForm = () => {
             label="Part Time"
             value="part-time"
             type="radio"
-            name="group1"
+            name="job_type"
+            onChange={handleChange}
+            required
           />
           <Form.Check
             inline
             label="Full Time"
             value="full-time"
             type="radio"
-            name="group1"
+            name="job_type"
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="pb-3">
+          <Form.Label className="pe-2">Job Level:</Form.Label>
+          <Form.Check
+            inline
+            label="Intern"
+            value="intern"
+            type="radio"
+            name="job_level"
+            onChange={handleChange}
+            required
+          />
+          <Form.Check
+            inline
+            label="Junior"
+            value="junior"
+            type="radio"
+            name="job_level"
+            onChange={handleChange}
+            required
+          />
+          <Form.Check
+            inline
+            label="Senior"
+            value="senior"
+            type="radio"
+            name="job_level"
+            onChange={handleChange}
+            required
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Profile:</Form.Label>
-          <Form.Control type="file" name="image" onChange={handleFiles} />
+          <Form.Label>Image:</Form.Label>
+          <Form.Control
+            type="file"
+            name="image"
+            onChange={handleFiles}
+            required
+          />
         </Form.Group>
         <Form.Group className="pt-4">
           <Form.Control

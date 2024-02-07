@@ -16,6 +16,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 app.use("/api/v1", upload.single("image"), route);
+app.use("/api/v1", route);
 
 const start = async () => {
   try {

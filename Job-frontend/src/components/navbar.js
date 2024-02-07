@@ -24,9 +24,11 @@ const NavbarSystem = () => {
             </Navbar.Text>
           ) : (
             <Navbar.Text>
-              <Button variant="success" className="me-2">
-                Signup
-              </Button>
+              <Link to="/registration">
+                <Button variant="success" className="me-2">
+                  Signup
+                </Button>
+              </Link>
               <Link to="/login">
                 <Button variant="success">Login</Button>
               </Link>

@@ -5,6 +5,7 @@ import Signup from "./pages/signup";
 import Home from "./pages/Home";
 import "./style.css";
 import Dashboard from "./pages/dashboard";
+import Search from "./pages/search";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/registration" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </BrowserRouter>
     </div>
