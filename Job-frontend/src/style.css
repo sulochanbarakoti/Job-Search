@@ -48,6 +48,7 @@
 /* topworker component style code */
 #card-style {
   width: 250px;
+  height: 500px;
   margin: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;

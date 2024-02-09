@@ -51,4 +51,14 @@ const getAllJobs = async (req, res) => {
   }
 };
 
-module.exports = { newJob, getAllJobs };
+const deleteJob = async (req, res) => {
+  try {
+    const res = await Job.findByIdAndDelete(req.params.id);
+    if (!res) return res.status(404).send("No job with this id found.");
+    res.status(200).send({ msg: "The job has been deleted." });
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+module.exports = { newJob, getAllJobs, deleteJob };

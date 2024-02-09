@@ -35,6 +35,19 @@ const DashboardDefault = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      console.log(id);
+      const res = await axios.delete(
+        `http://localhost:3001/api/v1/delete/job/${id}`
+      );
+      // alert("Deleted Successfully!");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Container>
       <Row>
@@ -58,7 +71,9 @@ const DashboardDefault = () => {
               <div>{job.description}</div>
             </Col>
             <Col xs={2}>
-              <Button variant="danger">Delete Job</Button>
+              <Button variant="danger" onClick={() => handleDelete(job._id)}>
+                Delete Job
+              </Button>
             </Col>
           </Row>
         ))}

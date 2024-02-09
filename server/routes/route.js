@@ -11,7 +11,7 @@ const {
   getAllCities,
   deleteCity,
 } = require("../controllers/cityAndCategory");
-const { newJob, getAllJobs } = require("../controllers/jobs");
+const { newJob, getAllJobs, deleteJob } = require("../controllers/jobs");
 
 // Multer configuration for handling image uploads
 const storage = multer.memoryStorage();
@@ -27,5 +27,6 @@ router.route("/delete/city/:id").delete(deleteCity);
 
 router.route("/create/job").post(newJob);
 router.route("/get/jobs").get(getAllJobs);
+router.route("/delete/job/:id").delete(deleteJob);
 
 module.exports = router;
