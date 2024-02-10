@@ -38,31 +38,21 @@ const Signup = () => {
         !formData.password,
       !formData.image)
     ) {
-      alert("Please fill in all fields.");
+      // alert("Please fill in all fields.");
       return;
     }
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("fullname", formData.fullname);
-      formDataToSend.append("username", formData.username);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("phone", formData.phone);
-      formDataToSend.append("password", formData.password);
-      formDataToSend.append("image", formData.image);
+      console.log(formData);
       const response = await axios.post(
         "http://localhost:3001/api/v1/signup",
-        formDataToSend,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
       console.log(response.data);
       navigate(`/`);
     } catch (error) {
       console.error(error);
-      alert("Error registering user");
+      // alert("Error registering user");
     }
   };
 

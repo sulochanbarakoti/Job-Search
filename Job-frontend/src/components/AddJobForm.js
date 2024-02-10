@@ -87,18 +87,14 @@ const AddJobForm = () => {
     dataToSend.append("job_level", formData.job_level);
     dataToSend.append("image", formData.image);
     try {
+      console.log(formData);
       const response = await axios.post(
         "http://localhost:3001/api/v1/create/job",
-        dataToSend,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        dataToSend
       );
       // console.log(response);
     } catch (error) {}
-    console.log(dataToSend);
+    // console.log(dataToSend);
   };
   return (
     <Container

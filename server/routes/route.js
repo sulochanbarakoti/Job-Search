@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
+const upload = require("../service/multerConfig");
 
 const { createUser, userLogin } = require("../controllers/user");
 const {
@@ -13,11 +13,8 @@ const {
 } = require("../controllers/cityAndCategory");
 const { newJob, getAllJobs, deleteJob } = require("../controllers/jobs");
 
-// Multer configuration for handling image uploads
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-router.route("/signup").post(createUser);
+// router.route("/signup").post(createUser);
+router.post("/signup", upload.single("image"), createUser);
 router.route("/login").post(userLogin);
 
 router.route("/add/category").post(createCategory).get(getAllCategories);
@@ -25,7 +22,7 @@ router.route("/delete/category/:id").delete(deleteCategory);
 router.route("/add/city").post(addCity).get(getAllCities);
 router.route("/delete/city/:id").delete(deleteCity);
 
-router.route("/create/job").post(newJob);
+router.post("/create/job", upload.single("image"), newJob);
 router.route("/get/jobs").get(getAllJobs);
 router.route("/delete/job/:id").delete(deleteJob);
 

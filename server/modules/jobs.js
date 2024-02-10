@@ -12,7 +12,7 @@ const jobSchema = new mongoose.Schema({
   location: { type: String },
   category: { type: String },
   job_level: { type: String },
-  image: { data: Buffer, contentType: String },
+  image: { type: String },
 });
 
 module.exports = mongoose.model("Jobs", jobSchema);

@@ -3,6 +3,7 @@ const Job = require("../modules/jobs");
 //new member registration
 const newJob = async (req, res) => {
   try {
+    const image = req.file ? req.file.path : undefined;
     const {
       job_title,
       company,
@@ -17,7 +18,7 @@ const newJob = async (req, res) => {
       job_level,
     } = req.body;
 
-    const newJob = new Job({
+    const data = new Job({
       job_title,
       company,
       open_date,
@@ -29,12 +30,12 @@ const newJob = async (req, res) => {
       location,
       category,
       job_level,
-      image: { data: req.file.buffer, contentType: req.file.mimetype },
+      image,
     });
-    const saveJob = await Job.create(newJob);
-    res.status(201).json({
+    const res = await Job.create(data);
+    res.status(200).json({
       msg: "Job added successfully",
-      user: saveJob,
+      user: res,
     });
   } catch (error) {
     console.log(error);

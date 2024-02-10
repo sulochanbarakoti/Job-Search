@@ -44,28 +44,6 @@ const Topworker = () => {
     ],
   };
 
-  // Function to convert image data to data URL
-  const getImageUrl = (imageData) => {
-    console.log("Image Data:", imageData);
-
-    if (imageData && imageData.contentType && imageData.data) {
-      try {
-        const base64Image = btoa(
-          String.fromCharCode(...new Uint8Array(imageData.data))
-        );
-        const imageUrl = `data:${imageData.contentType};base64,${base64Image}`;
-        console.log("Image URL:", imageUrl);
-        return imageUrl;
-      } catch (error) {
-        console.error("Error converting image to Base64:", error);
-        return "";
-      }
-    } else {
-      console.error("Invalid image data:", imageData);
-      return "";
-    }
-  };
-
   useEffect(() => {
     // fetch backend data
     const getJobs = async () => {
@@ -79,6 +57,14 @@ const Topworker = () => {
     getJobs();
   }, []);
 
+  const getImage = (imagePath) => {
+    const baseUrl = "http://localhost:3001/";
+    const formattedPath = imagePath.replace(/\\/g, "/"); // Replace backslashes with forward slashes
+    const url = baseUrl + formattedPath;
+    console.log(url);
+    return url;
+  };
+
   return (
     <div className="mb-5">
       <Row>
@@ -87,12 +73,12 @@ const Topworker = () => {
       <Slider {...settings}>
         {jobData
           ? jobData.map((job) => (
-              <div key={job.id}>
+              <div key={job._id}>
                 <Card id="card-style">
                   <Card.Img
                     id="card-image"
                     variant="top"
-                    src={getImageUrl(job.image)}
+                    src={getImage(job.image)}
                   />
                   <Card.Body>
                     <Card.Title>{job.job_title}</Card.Title>

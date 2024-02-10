@@ -13,28 +13,6 @@ const DashboardDefault = () => {
     jobs();
   }, []);
 
-  // Function to convert image data to data URL
-  const getImageUrl = (imageData) => {
-    console.log("Image Data:", imageData);
-
-    if (imageData && imageData.contentType && imageData.data) {
-      try {
-        const base64Image = btoa(
-          String.fromCharCode(...new Uint8Array(imageData.data))
-        );
-        const imageUrl = `data:${imageData.contentType};base64,${base64Image}`;
-        console.log("Image URL:", imageUrl);
-        return imageUrl;
-      } catch (error) {
-        console.error("Error converting image to Base64:", error);
-        return "";
-      }
-    } else {
-      console.error("Invalid image data:", imageData);
-      return "";
-    }
-  };
-
   const handleDelete = async (id) => {
     try {
       console.log(id);
@@ -46,6 +24,14 @@ const DashboardDefault = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const getImage = (imagePath) => {
+    const baseUrl = "http://localhost:3001/";
+    const formattedPath = imagePath.replace(/\\/g, "/"); // Replace backslashes with forward slashes
+    const url = baseUrl + formattedPath;
+    console.log(url);
+    return url;
   };
 
   return (
@@ -61,7 +47,8 @@ const DashboardDefault = () => {
           <Row id="job-style" className="m-2" key={index}>
             <Col xs={2}>
               <Image
-                src={getImageUrl(job.image)}
+                src={getImage(job.image)}
+                alt="Job Image"
                 style={{ height: "120px", width: "120px" }}
               />
             </Col>

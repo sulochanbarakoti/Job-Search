@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   phone: { type: String },
   password: { type: String, required: true },
   admin: { type: Boolean, default: false }, // admin or user
-  image: { data: Buffer, contentType: String },
+  // image: { data: Buffer, contentType: String },
+  image: { type: String },
 });
 
 //hash the password before saving

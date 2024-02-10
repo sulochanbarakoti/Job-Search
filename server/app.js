@@ -2,20 +2,16 @@ const express = require("express");
 const cors = require("cors");
 const connectDb = require("./db/connect");
 require("dotenv").config();
-const multer = require("multer");
+const path = require("path");
 
 const app = express();
 const route = require("./routes/route");
+app.use("/service", express.static(path.join(__dirname, "service")));
 
 //middleware
 app.use(cors());
 app.use(express.json());
 
-// Multer configuration for handling image uploads
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-app.use("/api/v1", upload.single("image"), route);
 app.use("/api/v1", route);
 
 const start = async () => {

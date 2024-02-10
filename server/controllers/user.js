@@ -4,19 +4,22 @@ const bcrypt = require("bcrypt");
 
 //New user registration
 const createUser = async (req, res) => {
-  try {
-    // Extract data from request body
-    const { fullname, username, email, phone, password } = req.body;
+  // Assuming the file path is available in req.file.path
+  const image = req.file ? req.file.path : undefined;
 
-    // Create a new user instance
-    const newUser = new User({
-      fullname,
-      username,
-      email,
-      phone,
-      password,
-      image: { data: req.file.buffer, contentType: req.file.mimetype },
-    });
+  //   // Extract data from request body
+  const { fullname, username, email, phone, password } = req.body;
+  console.log(image);
+  // Create a new user instance
+  const newUser = new User({
+    fullname,
+    username,
+    email,
+    phone,
+    password,
+    image,
+  });
+  try {
     const savedUser = await User.create(newUser);
     res.status(201).json({
       msg: "User registered successfully",
