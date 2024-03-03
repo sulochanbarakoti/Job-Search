@@ -92,9 +92,9 @@ const AddJobForm = () => {
         "http://localhost:3001/api/v1/create/job",
         dataToSend
       );
-      // console.log(response);
+      console.log(response);
     } catch (error) {}
-    // console.log(dataToSend);
+    console.log(dataToSend);
   };
   return (
     <Container

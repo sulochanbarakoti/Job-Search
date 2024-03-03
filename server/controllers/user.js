@@ -1,6 +1,9 @@
 const User = require("../modules/user");
 const getToken = require("../service/auth");
 const bcrypt = require("bcrypt");
+const cookiesParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 //New user registration
 const createUser = async (req, res) => {
@@ -42,11 +45,20 @@ const userLogin = async (req, res) => {
   if (!isMatch) return res.status(400).json({ msg: "Invalid Credentials" });
 
   // Return jsonwebtoken
+  const getToken = (userID) => {
+    return jwt.sign({ userID }, process.env.MY_SECRET, { expiresIn: "1h" });
+  };
   const token = getToken(user._id);
 
-  res.header("x-auth-token", token).json({
+  res.cookie("token", token, {
+    maxAge: 3600000, // 1 hour expiration time
+    httpOnly: true, // Cookie inaccessible to JavaScript
+    sameSite: "strict", // Prevent CSRF attacks
+    secure: true, // Enable for HTTPS only
+  });
+
+  res.status(200).json({
     msg: "Logged in Successfully!",
-    token,
     user: {
       id: user.id,
       username: user.username,

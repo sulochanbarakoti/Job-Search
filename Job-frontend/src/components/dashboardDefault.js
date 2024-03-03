@@ -7,7 +7,6 @@ const DashboardDefault = () => {
   useEffect(() => {
     const jobs = async () => {
       const response = await axios.get("http://localhost:3001/api/v1/get/jobs");
-      console.log(response.data);
       setAllJobs(response.data);
     };
     jobs();
@@ -19,7 +18,6 @@ const DashboardDefault = () => {
       const res = await axios.delete(
         `http://localhost:3001/api/v1/delete/job/${id}`
       );
-      // alert("Deleted Successfully!");
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -30,7 +28,6 @@ const DashboardDefault = () => {
     const baseUrl = "http://localhost:3001/";
     const formattedPath = imagePath.replace(/\\/g, "/"); // Replace backslashes with forward slashes
     const url = baseUrl + formattedPath;
-    console.log(url);
     return url;
   };
 
@@ -44,7 +41,7 @@ const DashboardDefault = () => {
       </Row>
       <Row>
         {allJobs.map((job, index) => (
-          <Row id="job-style" className="m-2" key={index}>
+          <Row id="job-style" className="m-2 w-100" key={index}>
             <Col xs={2}>
               <Image
                 src={getImage(job.image)}

@@ -3,9 +3,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Home from "./pages/Home";
+import Dashboard from "../src/pages/dashboard";
+
 import "./style.css";
-import Dashboard from "./pages/dashboard";
+
 import Search from "./pages/search";
+import RequireAuth from "./auth/RequireAuth";
+import AccessDenied from "./components/AccessDenied";
 
 function App() {
   return (
@@ -16,7 +20,7 @@ function App() {
           <Route path="/registration" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/search" element={RequireAuth(<Search />)} />
         </Routes>
       </BrowserRouter>
     </div>

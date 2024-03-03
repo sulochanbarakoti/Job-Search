@@ -3,6 +3,7 @@ const cors = require("cors");
 const connectDb = require("./db/connect");
 require("dotenv").config();
 const path = require("path");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const route = require("./routes/route");
@@ -11,6 +12,7 @@ app.use("/service", express.static(path.join(__dirname, "service")));
 //middleware
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/v1", route);
 

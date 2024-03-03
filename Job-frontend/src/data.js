@@ -60,4 +60,36 @@ export const cardData = [
     description:
       "Enthusiastic Data Scientist with expertise in machine learning algorithms.",
   },
+  {
+    id: 5,
+    title: "Sulochan Barakoti",
+    jobTitle: "WEB DEVELOPER",
+    image: profile1,
+    description:
+      "Experienced Web Developer with a passion for front-end technologies.",
+  },
+  {
+    id: 6,
+    title: "Sujan Pandit",
+    jobTitle: "GRAPHIC DESIGNER",
+    image: profile2,
+    description:
+      "Creative Graphic Designer with a keen eye for detail and aesthetics.",
+  },
+  {
+    id: 7,
+    title: "Sandesh Pandi",
+    jobTitle: "FULL-STACK DEVELOPER",
+    image: profile3,
+    description:
+      "Dedicated Software Engineer specializing in full-stack development.",
+  },
+  {
+    id: 8,
+    title: "Niroj Regmi",
+    jobTitle: "DATA SCIENTIST",
+    image: profile4,
+    description:
+      "Enthusiastic Data Scientist with expertise in machine learning algorithms.",
+  },
 ];

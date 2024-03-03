@@ -1,4 +1,5 @@
 const Job = require("../modules/jobs");
+const verifyToken = require("../service/auth");
 
 //new member registration
 const newJob = async (req, res) => {
@@ -32,23 +33,23 @@ const newJob = async (req, res) => {
       job_level,
       image,
     });
+    const token = req.cookies.token;
     const res = await Job.create(data);
     res.status(200).json({
       msg: "Job added successfully",
       user: res,
     });
   } catch (error) {
-    console.log(error);
+    res.status(401).send({ protected: true, msg: "error" });
   }
 };
 
 const getAllJobs = async (req, res) => {
   try {
-    // const jobs = await Job.find(filter).sort("open_date");
     const jobs = await Job.find();
     res.status(200).json(jobs);
   } catch (err) {
-    console.log(err);
+    res.status(401).send({ protected: true, msg: "error" });
   }
 };
 

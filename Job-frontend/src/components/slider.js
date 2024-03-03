@@ -63,11 +63,7 @@ const Slider = () => {
             </DropdownButton>
           </InputGroup>
           {/* <Link to="/search"> */}
-          <Button
-            className="m-1"
-            style={{ width: "60%" }}
-            variant="outline-success"
-          >
+          <Button className="m-1" style={{ width: "60%" }} variant="success">
             Search
           </Button>
           {/* </Link> */}

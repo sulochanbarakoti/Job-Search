@@ -37,6 +37,7 @@ const AddCategory = () => {
     try {
       const response = await axios.post(
         "http://localhost:3001/api/v1/add/category",
+        { withCredentials: true },
         categoryName
       );
       console.log(response);
@@ -62,7 +63,8 @@ const AddCategory = () => {
     if (window.confirm("Are you sure?")) {
       try {
         const response = await axios.delete(
-          `http://localhost:3001/api/v1/delete/category/${id}`
+          `http://localhost:3001/api/v1/delete/category/${id}`,
+          { withCredentials: true }
         );
         setMsg(response.data.msg);
         setAlertShow(false);

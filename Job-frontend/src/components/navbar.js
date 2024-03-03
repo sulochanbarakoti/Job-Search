@@ -10,7 +10,7 @@ const NavbarSystem = () => {
   return (
     <Navbar id="navbar-system">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <Image src={logo} style={{ height: "40px", width: "150px" }} />
         </Navbar.Brand>
         <Navbar.Toggle />

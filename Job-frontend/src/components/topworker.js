@@ -10,7 +10,7 @@ const Topworker = () => {
   const [jobData, setJobData] = useState([]);
   const settings = {
     centerMode: true,
-    // centerPadding: "60px",
+    centerPadding: "5%",
     arrows: true,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -22,7 +22,7 @@ const Topworker = () => {
         settings: {
           arrows: false,
           centerMode: true,
-          centerPadding: "40px",
+          // centerPadding: "80px",
           slidesToShow: 3,
           slidesToScroll: 1,
           autoplay: true,
@@ -34,7 +34,7 @@ const Topworker = () => {
         settings: {
           arrows: false,
           centerMode: true,
-          // centerPadding: "10px",
+          // centerPadding: "80px",
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,
